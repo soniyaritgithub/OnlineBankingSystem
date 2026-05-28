@@ -32,7 +32,10 @@ app.use(
 "/api/auth",
 authRoutes
 );
-
+app.use(
+"/api",
+authRoutes
+);
 mongoose
 .connect(process.env.MONGO_URI)
 .then(() => {

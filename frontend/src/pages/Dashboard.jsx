@@ -20,7 +20,15 @@ const fetchProfile = async () => {
 
   try {
 
-    const response = await API.get("/profile");
+    const savedUser =
+JSON.parse(
+localStorage.getItem("user")
+);
+
+const response =
+await API.get(
+`/profile?email=${savedUser.email}`
+);
 
     if (response?.data) {
 

@@ -215,6 +215,49 @@ message:
 }
 
 });
+router.get("/profile", async (req, res) => {
 
+try {
+
+const email =
+req.query.email;
+
+const user =
+await User.findOne({
+email
+});
+
+if(!user){
+
+return res
+.status(404)
+.json({
+
+message:
+"User not found"
+
+});
+
+}
+
+res.json(user);
+
+}
+
+catch(err){
+
+console.log(err);
+
+res.status(500)
+.json({
+
+message:
+"Profile Error"
+
+});
+
+}
+
+});
 module.exports =
 router;
