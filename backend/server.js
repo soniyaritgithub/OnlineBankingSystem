@@ -1,3 +1,5 @@
+const transactionRoutes =
+require("./routes/transactionRoutes");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -42,7 +44,10 @@ app.use(
   "/api",
   authRoutes
 );
-
+app.use(
+  "/api/transactions",
+  transactionRoutes
+);
 // transactions route agar file hai toh use karo
 /*
 app.use(
