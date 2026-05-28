@@ -10,6 +10,10 @@ require("./routes/careerRoutes");
 const authRoutes =
 require("./routes/authRoutes");
 
+// agar transactionRoutes file hai toh uncomment karna
+// const transactionRoutes =
+// require("./routes/transactionRoutes");
+
 const app = express();
 
 app.use(
@@ -21,6 +25,8 @@ app.use(
 
 app.use(express.json());
 
+/* ROUTES */
+
 app.use(
   "/api/careers",
   careerRoutes
@@ -31,26 +37,37 @@ app.use(
   authRoutes
 );
 
-// profile, transactions, login etc routes ke liye
+// profile/login/register routes
 app.use(
   "/api",
   authRoutes
 );
 
+// transactions route agar file hai toh use karo
+/*
+app.use(
+  "/api/transactions",
+  transactionRoutes
+);
+*/
+
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
+.connect(process.env.MONGO_URI)
+.then(() => {
 
-    console.log(
-      "MongoDB Connected 🚀"
-    );
+  console.log(
+    "MongoDB Connected 🚀"
+  );
 
-  })
-  .catch((err) => {
+})
+.catch((err) => {
 
-    console.log(err);
+  console.log(
+    "Mongo Error:",
+    err
+  );
 
-  });
+});
 
 app.get("/", (req, res) => {
 
