@@ -141,7 +141,7 @@ const EmiCalculator = () => {
 
             const response = await axios.post(
 
-                "http://127.0.0.1:8000/api/calculate-emi/",
+                "https://onlinebankingsystem-qguw.onrender.com/api/calculate-emi",
 
                 {
                     loan_amount: loanAmount,
