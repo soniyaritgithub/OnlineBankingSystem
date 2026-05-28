@@ -16,49 +16,91 @@ const TransactionTable = () => {
     try {
 
       const response = await API.get(
-        "transactions/"
+        "/transactions"
       );
 
-      setTransactions(response.data);
+      setTransactions(
+        response.data || []
+      );
 
     } catch (err) {
 
-      console.log(err);
+      console.log(
+        "Transaction Error:",
+        err
+      );
+
+      setTransactions([]);
 
     }
+
   };
 
   useEffect(() => {
 
-    const getTransactions = async () => {
+  let mounted = true;
+
+  const getTransactions = async () => {
+
+    if (mounted) {
 
       await fetchTransactions();
 
-    };
+    }
 
-    getTransactions();
+  };
 
-  }, []);
+  getTransactions();
 
-  const filteredTransactions = transactions.filter((item) => {
+  return () => {
+
+    mounted = false;
+
+  };
+
+}, []);
+
+  const filteredTransactions =
+  transactions.filter((item) => {
 
     const matchesSearch =
-  String(item.receiver_account || "")
-    .toLowerCase()
-    .includes(search.toLowerCase());
+
+      String(
+        item.receiver_account || ""
+      )
+      .toLowerCase()
+      .includes(
+        search.toLowerCase()
+      );
 
     const matchesDate =
+
       dateFilter === "" ||
-      item.timestamp?.slice(0, 10) === dateFilter;
+
+      item.timestamp
+      ?.slice(0, 10) ===
+      dateFilter;
+
+    const transactionType =
+
+      item.transaction_type ||
+      item.type;
 
     const matchesType =
+
       typeFilter === "all" ||
-      item.type === typeFilter;
+
+      transactionType ===
+      typeFilter;
 
     return (
+
       matchesSearch &&
+
       matchesDate &&
+
       matchesType
+
     );
 
   });
@@ -68,10 +110,10 @@ const TransactionTable = () => {
     <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 mt-10 overflow-x-auto">
 
       <h2 className="text-3xl font-bold text-white mb-6">
-        Recent Transactions
-      </h2>
 
-      {/* FILTERS */}
+        Recent Transactions
+
+      </h2>
 
       <div className="flex flex-col md:flex-row flex-wrap gap-4 mb-8">
 
@@ -79,20 +121,30 @@ const TransactionTable = () => {
           type="text"
           placeholder="Search Account Number"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
           className="w-full md:w-80 p-4 rounded-2xl bg-white/10 border border-white/10 outline-none text-white"
         />
 
         <input
           type="date"
           value={dateFilter}
-          onChange={(e) => setDateFilter(e.target.value)}
+          onChange={(e) =>
+            setDateFilter(
+              e.target.value
+            )
+          }
           className="p-4 rounded-2xl bg-white/10 border border-white/10 outline-none text-white"
         />
 
         <select
           value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value)}
+          onChange={(e) =>
+            setTypeFilter(
+              e.target.value
+            )
+          }
           className="p-4 rounded-2xl bg-white/10 border border-white/10 outline-none text-white"
         >
 
@@ -118,75 +170,118 @@ const TransactionTable = () => {
 
           <tr className="border-b border-white/20 text-left">
 
-  <th className="p-4">
-    Receiver Account
-  </th>
+            <th className="p-4">
+              Receiver Account
+            </th>
 
-  <th className="p-4">
-    Type
-  </th>
+            <th className="p-4">
+              Type
+            </th>
 
-  <th className="p-4">
-    Amount
-  </th>
+            <th className="p-4">
+              Amount
+            </th>
 
-  <th className="p-4">
-    Date
-  </th>
+            <th className="p-4">
+              Date
+            </th>
 
-</tr>
+          </tr>
 
         </thead>
 
         <tbody>
 
-          {filteredTransactions.map((item) => (
+          {filteredTransactions.length === 0 ? (
 
-            <tr
-              key={item.id}
-              className="border-b border-white/10"
-            >
+            <tr>
 
-              <td className="p-4">
-  {item.receiver_account}
-</td>
+              <td
+                colSpan="4"
+                className="p-6 text-center text-gray-400"
+              >
 
-<td className="p-4">
+                No Transactions Found
 
-  {item.transaction_type === "credit" ? (
-
-    <span className="text-green-400 font-bold">
-      Credit
-    </span>
-
-  ) : (
-
-    <span className="text-red-400 font-bold">
-      Debit
-    </span>
-
-  )}
-
-</td>
-
-<td className="p-4 text-cyan-400">
-  ₹{item.amount}
-</td>
-
-<td className="p-4">
-  {item.timestamp}
-</td>
+              </td>
 
             </tr>
 
-          ))}
+          ) : (
+
+            filteredTransactions.map((item, index) => (
+
+              <tr
+                key={
+                  item.id || index
+                }
+                className="border-b border-white/10"
+              >
+
+                <td className="p-4">
+
+                  {
+                    item.receiver_account ||
+                    "N/A"
+                  }
+
+                </td>
+
+                <td className="p-4">
+
+                  {(item.transaction_type ||
+                    item.type) ===
+                  "credit" ? (
+
+                    <span className="text-green-400 font-bold">
+
+                      Credit
+
+                    </span>
+
+                  ) : (
+
+                    <span className="text-red-400 font-bold">
+
+                      Debit
+
+                    </span>
+
+                  )}
+
+                </td>
+
+                <td className="p-4 text-cyan-400">
+
+                  ₹{
+                    item.amount || 0
+                  }
+
+                </td>
+
+                <td className="p-4">
+
+                  {
+                    item.timestamp ||
+                    "N/A"
+                  }
+
+                </td>
+
+              </tr>
+
+            ))
+
+          )}
 
         </tbody>
 
       </table>
 
     </div>
+
   );
+
 };
 
 export default TransactionTable;
