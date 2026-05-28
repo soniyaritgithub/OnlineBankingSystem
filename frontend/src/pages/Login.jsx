@@ -26,52 +26,52 @@ const Login = () => {
 
   const handleLogin = async () => {
 
-  try {
+    try {
 
-    const response = await API.post(
-      "/auth/login",
-      formData
-    );
+      const response = await API.post(
+        "/auth/login",
+        formData
+      );
 
-    console.log(
-      response.data
-    );
+      console.log(
+        response.data
+      );
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify(
-        response.data.user
-      )
-    );
+      localStorage.setItem(
+        "user",
+        JSON.stringify(
+          response.data.user
+        )
+      );
 
-    localStorage.setItem(
-      "token",
-      "loggedin"
-    );
+      localStorage.setItem(
+        "token",
+        "loggedin"
+      );
 
-    alert(
-      "Login Successful"
-    );
+      alert(
+        "Login Successful"
+      );
 
-    navigate(
-      "/admin-dashboard"
-    );
+      navigate(
+        "/dashboard"
+      );
 
-  } catch (error) {
+    } catch (error) {
 
-    console.log(
-      error.response?.data ||
-      error.message
-    );
+      console.log(
+        error.response?.data ||
+        error.message
+      );
 
-    alert(
-      error.response?.data?.message ||
-      "Invalid Credentials"
-    );
+      alert(
+        error.response?.data?.message ||
+        "Invalid Credentials"
+      );
 
-  }
+    }
 
-};
+  };
 
   return (
 
