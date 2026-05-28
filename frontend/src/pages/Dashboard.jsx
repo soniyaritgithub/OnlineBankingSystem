@@ -16,20 +16,25 @@ const Dashboard = () => {
 
   const [, setActiveSection] = useState("dashboard");
 
-  const fetchProfile = async () => {
+const fetchProfile = async () => {
 
-    try {
+  try {
 
-      const response = await API.get("/profile");
+    const response = await API.get("/profile");
+
+    if (response?.data) {
 
       setUser(response.data);
 
-    } catch (err) {
-
-      console.log("Profile Error:", err);
-
     }
-  };
+
+  } catch (err) {
+
+    console.log("Profile Error:", err);
+
+  }
+
+};
 
   // PDF DOWNLOAD 😎
 
@@ -52,13 +57,16 @@ const Dashboard = () => {
 
       const blob = await response.blob();
 
-      const url = window.URL.createObjectURL(blob);
+      const fileUrl =
+        window.URL.createObjectURL(blob);
 
-      const link = document.createElement("a");
+      const link =
+        document.createElement("a");
 
-      link.href = url;
+      link.href = fileUrl;
 
-      link.download = "statement.pdf";
+      link.download =
+        "statement.pdf";
 
       document.body.appendChild(link);
 
@@ -71,17 +79,26 @@ const Dashboard = () => {
       console.log(err);
 
     }
+
   };
 
  useEffect(() => {
 
-  const getProfile = async () => {
+  const loadProfile = async () => {
 
-    await fetchProfile();
+    try {
+
+      await fetchProfile();
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
 
   };
 
-  getProfile();
+  loadProfile();
 
 }, []);
 
@@ -93,12 +110,18 @@ const Dashboard = () => {
 
       <div className="flex">
 
-        <Sidebar setActiveSection={setActiveSection} />
+        <Sidebar
+          setActiveSection={
+            setActiveSection
+          }
+        />
 
         <div className="flex-1 p-4 pt-24 md:p-8 text-white overflow-x-hidden">
 
           <h1 className="text-3xl md:text-5xl font-bold">
+
             Banking Dashboard
+
           </h1>
 
           <div className="grid md:grid-cols-3 gap-6 mt-10">
@@ -106,7 +129,9 @@ const Dashboard = () => {
             <div className="bg-white/10 backdrop-blur-lg p-4 md:p-8 rounded-3xl border border-white/20">
 
               <h2 className="text-xl md:text-3xl">
+
                 Total Balance
+
               </h2>
 
               <p className="text-3xl md:text-5xl font-bold text-cyan-400 mt-4">
@@ -120,7 +145,9 @@ const Dashboard = () => {
             <div className="bg-white/10 backdrop-blur-lg p-4 md:p-8 rounded-3xl border border-white/20">
 
               <h2 className="text-xl md:text-3xl">
+
                 Transactions
+
               </h2>
 
               <p className="text-3xl md:text-5xl font-bold text-green-400 mt-4">
@@ -134,7 +161,9 @@ const Dashboard = () => {
             <div className="bg-white/10 backdrop-blur-lg p-4 md:p-8 rounded-3xl border border-white/20">
 
               <h2 className="text-xl md:text-3xl">
+
                 Loans
+
               </h2>
 
               <p className="text-3xl md:text-5xl font-bold text-pink-400 mt-4">
@@ -150,33 +179,53 @@ const Dashboard = () => {
           <div className="flex flex-wrap gap-4 mt-8">
 
             <Link to="/upi-payment">
+
               <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-cyan-500">
+
                 UPI Payment 📱
+
               </button>
+
             </Link>
 
             <Link to="/debit-card">
+
               <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-purple-600">
+
                 Debit Card 💳
+
               </button>
+
             </Link>
 
             <Link to="/loan">
+
               <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-green-600">
+
                 Loan Apply 🏦
+
               </button>
+
             </Link>
 
             <Link to="/emi-calculator">
+
               <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-orange-600">
+
                 EMI Calculator 📊
+
               </button>
+
             </Link>
 
             <Link to="/admin-dashboard">
+
               <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-red-600">
+
                 Admin Dashboard 👨‍💻
+
               </button>
+
             </Link>
 
           </div>
@@ -185,12 +234,18 @@ const Dashboard = () => {
 
           <BalanceChart />
 
-          <MoneyTransfer fetchProfile={fetchProfile} />
+          <MoneyTransfer
+            fetchProfile={
+              fetchProfile
+            }
+          />
 
           <TransactionTable />
 
           <button
-            onClick={downloadStatement}
+            onClick={
+              downloadStatement
+            }
             className="bg-cyan-500 hover:bg-cyan-400 px-5 py-3 rounded-2xl mt-8 font-bold"
           >
 
@@ -205,6 +260,7 @@ const Dashboard = () => {
     </div>
 
   );
+
 };
 
 export default Dashboard;
