@@ -131,12 +131,20 @@ message:
 
 }
 
+const safeUser = {
+
+_id: user._id,
+username: user.username,
+email: user.email
+
+};
+
 res.json({
 
 message:
 "Login Success",
 
-user
+user: safeUser
 
 });
 
@@ -154,6 +162,53 @@ res.status(500)
 
 message:
 "Login Failed"
+
+});
+
+}
+
+});
+
+router.get(
+"/profile",
+async (req,res)=>{
+
+try{
+
+const email =
+req.query.email;
+
+const user =
+await User.findOne({
+email
+}).select("-password");
+
+if(!user){
+
+return res
+.status(404)
+.json({
+
+message:
+"User not found"
+
+});
+
+}
+
+res.json(user);
+
+}
+
+catch(err){
+
+console.log(err);
+
+res.status(500)
+.json({
+
+message:
+"Profile Error"
 
 });
 

@@ -14,19 +14,19 @@ const Dashboard = () => {
 
   const [user, setUser] = useState(null);
 
-  const [activeSection, setActiveSection] = useState("dashboard");
+  const [, setActiveSection] = useState("dashboard");
 
   const fetchProfile = async () => {
 
     try {
 
-      const response = await API.get("profile/");
+      const response = await API.get("/profile");
 
       setUser(response.data);
 
     } catch (err) {
 
-      console.log(err);
+      console.log("Profile Error:", err);
 
     }
   };
@@ -40,7 +40,7 @@ const Dashboard = () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/download-statement/",
+        "https://onlinebankingsystem-qguw.onrender.com/api/download-statement",
         {
           method: "GET",
 
@@ -73,17 +73,17 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
 
-    const getProfile = async () => {
+  const getProfile = async () => {
 
-      await fetchProfile();
+    await fetchProfile();
 
-    };
+  };
 
-    getProfile();
+  getProfile();
 
-  }, []);
+}, []);
 
   return (
 
@@ -98,9 +98,7 @@ const Dashboard = () => {
         <div className="flex-1 p-4 pt-24 md:p-8 text-white overflow-x-hidden">
 
           <h1 className="text-3xl md:text-5xl font-bold">
-
             Banking Dashboard
-
           </h1>
 
           <div className="grid md:grid-cols-3 gap-6 mt-10">
@@ -113,7 +111,7 @@ const Dashboard = () => {
 
               <p className="text-3xl md:text-5xl font-bold text-cyan-400 mt-4">
 
-                ₹{user?.balance}
+                ₹{user?.balance || 0}
 
               </p>
 
@@ -149,110 +147,36 @@ const Dashboard = () => {
 
           </div>
 
-          {/* ACTION BUTTONS 😎🔥 */}
-
-          <div
-            className="flex flex-wrap gap-4 mt-8"
-          >
-
-            {/* UPI PAYMENT 😎 */}
+          <div className="flex flex-wrap gap-4 mt-8">
 
             <Link to="/upi-payment">
-
-              <button
-                className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold"
-                style={{
-                  background: "#06b6d4",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer"
-                }}
-              >
-
+              <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-cyan-500">
                 UPI Payment 📱
-
               </button>
-
             </Link>
-
-            {/* DEBIT CARD 😎 */}
 
             <Link to="/debit-card">
-
-              <button
-                className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold"
-                style={{
-                  background: "#7c3aed",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer"
-                }}
-              >
-
+              <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-purple-600">
                 Debit Card 💳
-
               </button>
-
             </Link>
-
-            {/* LOAN APPLY 😎 */}
 
             <Link to="/loan">
-
-              <button
-                className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold"
-                style={{
-                  background: "#16a34a",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer"
-                }}
-              >
-
+              <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-green-600">
                 Loan Apply 🏦
-
               </button>
-
             </Link>
-
-            {/* EMI CALCULATOR 😎 */}
 
             <Link to="/emi-calculator">
-
-              <button
-                className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold"
-                style={{
-                  background: "#ea580c",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer"
-                }}
-              >
-
+              <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-orange-600">
                 EMI Calculator 📊
-
               </button>
-
             </Link>
 
-            {/* ADMIN DASHBOARD 😎 */}
-
             <Link to="/admin-dashboard">
-
-              <button
-                className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold"
-                style={{
-                  background: "#dc2626",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer"
-                }}
-              >
-
+              <button className="px-5 py-3 rounded-xl text-sm md:text-lg font-bold bg-red-600">
                 Admin Dashboard 👨‍💻
-
               </button>
-
             </Link>
 
           </div>
@@ -265,74 +189,14 @@ const Dashboard = () => {
 
           <TransactionTable />
 
-          {/* DOWNLOAD PDF BUTTON 😎 */}
-
           <button
             onClick={downloadStatement}
-            className="bg-cyan-500 hover:bg-cyan-400 transition duration-300 px-5 py-3 md:px-6 md:py-4 rounded-2xl mt-8 text-sm md:text-lg font-bold"
+            className="bg-cyan-500 hover:bg-cyan-400 px-5 py-3 rounded-2xl mt-8 font-bold"
           >
 
             Download Statement PDF
 
           </button>
-
-          {/* DYNAMIC CONTENT */}
-
-          {activeSection === "transactions" && (
-
-            <div className="bg-white/10 border border-white/10 rounded-3xl p-6 md:p-10 mt-10">
-
-              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-cyan-400">
-                Recent Transactions
-              </h2>
-
-              <div className="space-y-6">
-
-                <div className="flex justify-between items-center bg-white/5 p-5 rounded-2xl">
-
-                  <div>
-
-                    <h3 className="font-bold text-lg md:text-2xl">
-                      Money Transfer
-                    </h3>
-
-                    <p className="text-gray-400 text-sm md:text-base">
-                      Sent to ACC4501
-                    </p>
-
-                  </div>
-
-                  <span className="text-red-400 font-bold text-lg md:text-2xl">
-                    - ₹500
-                  </span>
-
-                </div>
-
-                <div className="flex justify-between items-center bg-white/5 p-5 rounded-2xl">
-
-                  <div>
-
-                    <h3 className="font-bold text-lg md:text-2xl">
-                      Salary Credit
-                    </h3>
-
-                    <p className="text-gray-400 text-sm md:text-base">
-                      Monthly Salary
-                    </p>
-
-                  </div>
-
-                  <span className="text-green-400 font-bold text-lg md:text-2xl">
-                    + ₹25,000
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          )}
 
         </div>
 
