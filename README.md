@@ -2,7 +2,15 @@
 
 ## Overview
 
-SmartBank is a full stack online banking application with secure authentication, UPI payments, loan management, transaction history, and admin dashboard.
+A full-stack banking platform with secure authentication, UPI transfers, transaction management, loan modules, and admin dashboard.
+
+## Live Demo
+
+Frontend:
+https://online-banking-system-eight.vercel.app/
+
+Backend:
+https://onlinebankingsystem-qguw.onrender.com/
 
 ## Features
 
@@ -22,26 +30,21 @@ Frontend:
 - React.js
 - Vite
 - Tailwind CSS
+- Axios
 
 Backend:
 - Django
 - Django REST Framework
 - JWT Authentication
+- Node.js
+- Express.js
 
 Database:
-- MongoDB / (your database)
+- MySQL
 
 Deployment:
 - Vercel
 - Render
-
-## Live Demo
-
-Frontend:
-https://online-banking-system-eight.vercel.app/
-
-Backend:
-https://onlinebankingsystem-qguw.onrender.com/
 
 ## Installation
 
