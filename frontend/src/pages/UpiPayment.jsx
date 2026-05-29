@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import axios from "axios";
+import API from "../services/api";
 
 const UpiPayment = () => {
 
@@ -56,46 +56,73 @@ const UpiPayment = () => {
 
     const handlePayment = async () => {
 
-        try {
+    try {
 
-            setLoading(true);
+        setLoading(true);
 
-            const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-            const response = await axios.post(
+        const response = await API.post(
 
-                "http://127.0.0.1:8000/api/upi-transfer/",
+            "/upi-transfer/",
 
-                {
-                    upi_id: upiId,
-                    amount: amount
-                },
+            {
 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                upi_id: upiId,
+
+                amount: Number(amount)
+
+            },
+
+            {
+
+                headers: {
+
+                    Authorization: `Bearer ${token}`
+
                 }
-            );
 
-            alert(response.data.message);
+            }
 
-            setUpiId("");
+        );
 
-            setAmount("");
+        alert(
 
-        } catch (error) {
+            response.data.message ||
 
-            alert("UPI Payment Failed");
+            "Payment Successful 🚀"
 
-            console.log(error);
+        );
 
-        } finally {
+        setUpiId("");
 
-            setLoading(false);
+        setAmount("");
 
-        }
-    };
+    } catch (error) {
+
+        console.log(
+
+            error.response?.data ||
+
+            error
+
+        );
+
+        alert(
+
+            error.response?.data?.message ||
+
+            "UPI Payment Failed"
+
+        );
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+};
 
     return (
 
