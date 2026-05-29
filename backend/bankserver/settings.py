@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-4q5_ou&r67fe)q0w)=0=ld7&wx=0uw@8@7#5!lnav)m(^c_ke1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "smartbank-django-backend.onrender.com",
+    ".onrender.com"
+]
 
 
 # Application definition
@@ -126,9 +131,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+
 STATIC_URL = 'static/'
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://online-banking-system-eight.vercel.app",
+    "http://localhost:5173"
+]
+
 CORS_ALLOW_CREDENTIALS = True
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -148,9 +162,6 @@ EMAIL_HOST_PASSWORD = 'wxvn bytt fxfz pnvf'
 
 CORS_ALLOW_ALL_ORIGINS = True
 SIMPLE_JWT = {
-
     "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
-
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
-
 }
