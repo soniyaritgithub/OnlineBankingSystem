@@ -40,7 +40,7 @@ const AdminLogin = () => {
 
             const response = await axios.post(
 
-                "https://smartbank-django-backend.onrender.com/api/login/",
+                "https://https://onlinebankingsystem-qguw.onrender.com/api/login/api/login/",
 
                 formData
 
