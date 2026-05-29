@@ -2,7 +2,11 @@ import axios from "axios";
 
 const API = axios.create({
 
-  baseURL: "https://onlinebankingsystem-qguw.onrender.com/api",
+  baseURL: "https://smartbank-django-backend.onrender.com/api",
+
+  headers: {
+    "Content-Type": "application/json",
+  },
 
 });
 
