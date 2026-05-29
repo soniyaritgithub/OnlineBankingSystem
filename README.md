@@ -87,7 +87,17 @@ OnlineBankingSystem
 └── requirements.txt
 ```
 
-## Installation
+## ⚙️ Setup Guide
+
+### Backend Setup
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+Backend server start ho jayega.
 
 ### Frontend Setup
 
@@ -95,3 +105,15 @@ OnlineBankingSystem
 cd frontend
 npm install
 npm run dev
+```
+
+Frontend local server run ho jayega.
+
+### Environment Variables
+
+Create `.env` file:
+
+```env
+VITE_API_URL=https://onlinebankingsystem-qguw.onrender.com
+JWT_SECRET=your_secret_key
+```
