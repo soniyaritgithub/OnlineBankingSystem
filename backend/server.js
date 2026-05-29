@@ -3,7 +3,8 @@ require("./routes/transactionRoutes");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const emiRoutes =
+require("./routes/emiRoutes");
 require("dotenv").config();
 
 const careerRoutes =
@@ -45,9 +46,15 @@ app.use(
   authRoutes
 );
 app.use(
+  "/api",
+  emiRoutes
+);
+app.use(
   "/api/transactions",
   transactionRoutes
 );
+
+
 // transactions route agar file hai toh use karo
 /*
 app.use(
