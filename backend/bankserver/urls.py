@@ -8,9 +8,6 @@ urlpatterns = [
         admin.site.urls
     ),
 
-    path(
-        'api/',
-        include('banking.urls')
-    ),
-
+    path("api/", include("banking.urls")),
 ]
+
