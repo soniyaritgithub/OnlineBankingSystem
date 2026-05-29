@@ -14,13 +14,12 @@ from .views import (
     forgot_password,
     reset_password,
     download_statement,
-create_loan,
-admin_dashboard,
-approve_loan,
-calculate_emi,
-check_penalty,
+    create_loan,
+    admin_dashboard,
+    approve_loan,
+    calculate_emi,
+    check_penalty,
 )
-
 
 urlpatterns = [
 
@@ -29,8 +28,15 @@ urlpatterns = [
         register
     ),
 
+    # OLD LOGIN ROUTE (keep it)
     path(
         'login/',
+        TokenObtainPairView.as_view()
+    ),
+
+    # NEW ROUTE FOR FRONTEND LOGIN
+    path(
+        'auth/login/',
         TokenObtainPairView.as_view()
     ),
 
@@ -73,28 +79,30 @@ urlpatterns = [
         'create-loan/',
         create_loan
     ),
-path(
-    'calculate-emi/',
-    calculate_emi
-),
-path(
-    'approve-loan/<int:loan_id>/',
-    approve_loan
-),
 
-path(
-    'check-penalty/<int:loan_id>/',
-    check_penalty
-),
+    path(
+        'calculate-emi/',
+        calculate_emi
+    ),
 
-path(
-    'admin-dashboard/',
-    admin_dashboard
-),
+    path(
+        'approve-loan/<int:loan_id>/',
+        approve_loan
+    ),
 
-path(
-    'upi-transfer/',
-    upi_transfer
-),
+    path(
+        'check-penalty/<int:loan_id>/',
+        check_penalty
+    ),
+
+    path(
+        'admin-dashboard/',
+        admin_dashboard
+    ),
+
+    path(
+        'upi-transfer/',
+        upi_transfer
+    ),
 
 ]
