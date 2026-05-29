@@ -36,55 +36,67 @@ const LoanPage = () => {
 
     const handleLoan = async () => {
 
-        try {
+    try {
 
-            setLoading(true);
+        setLoading(true);
 
-            const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-            const response = await axios.post(
+        const response = await axios.post(
 
-                "https://onlinebankingsystem-qguw.onrender.com/api/create-loan",
+            "https://onlinebankingsystem-qguw.onrender.com/api/create-loan",
 
-                {
-                    loan_amount: loanAmount,
-                    emi: emi,
-                    due_date: dueDate
-                },
+            {
 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                amount: Number(loanAmount),
+
+                salary: Number(emi),
+
+                date: dueDate
+
+            },
+
+            {
+
+                headers: {
+
+                    Authorization: `Bearer ${token}`
+
                 }
-            );
 
-            alert("Loan Applied Successfully 🚀");
+            }
 
-            console.log(response.data);
+        );
 
-            setLoanAmount("");
-            setEmi("");
-            setDueDate("");
+        alert("Loan Applied Successfully 🚀");
 
-        } catch(err){
+        console.log(response.data);
 
- console.log(err);
+        setLoanAmount("");
 
- alert(
+        setEmi("");
 
-   err.response?.data?.message ||
+        setDueDate("");
 
-   "Loan Application Failed ❌"
+    } catch(err){
 
- );
+        console.log(err.response?.data);
 
-} finally {
+        alert(
 
-            setLoading(false);
+            err.response?.data?.message ||
 
-        }
-    };
+            "Loan Failed ❌"
+
+        );
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+};
 
     return (
 
