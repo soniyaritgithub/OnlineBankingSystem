@@ -260,43 +260,55 @@ message:
 
 });
 
-router.post("/calculate-emi", async (req, res) => {
+
+
+router.post("/create-loan", async (req, res) => {
 
     try {
 
-        const { loan_amount, interest_rate, tenure } = req.body;
+        const {
 
-        const P = Number(loan_amount);
+            amount,
 
-        const R = Number(interest_rate) / 12 / 100;
+            salary,
 
-        const N = Number(tenure);
+            date
 
-        const emi = (
+        } = req.body;
 
-            P *
-            R *
-            Math.pow(1 + R, N)
+        if (!amount || !salary || !date) {
 
-        ) /
+            return res.status(400).json({
 
-        (
+                message: "All fields required"
 
-            Math.pow(1 + R, N) - 1
+            });
 
-        );
+        }
 
-        res.json({
+        res.status(200).json({
 
-            emi: emi.toFixed(2)
+            message: "Loan Applied Successfully",
+
+            loan: {
+
+                amount,
+
+                salary,
+
+                date
+
+            }
 
         });
 
     } catch (err) {
 
+        console.log(err);
+
         res.status(500).json({
 
-            message: "EMI Error"
+            message: "Loan Application Failed"
 
         });
 
