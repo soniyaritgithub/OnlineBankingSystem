@@ -38,10 +38,10 @@ Deployment:
 ## Live Demo
 
 Frontend:
-https://online-banking-system-eight.vercel.app
+https://online-banking-system-eight.vercel.app/
 
 Backend:
-https://onlinebankingsystem-qguw.onrender.com
+https://onlinebankingsystem-qguw.onrender.com/
 
 ## Installation
 
