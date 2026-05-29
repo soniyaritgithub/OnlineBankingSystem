@@ -133,43 +133,49 @@ const EmiCalculator = () => {
 
     const calculateEmi = async () => {
 
-        try {
+    if (!loanAmount || !interestRate || !tenure) {
 
-            setLoading(true);
+        alert("Please fill all fields");
 
-            const token = localStorage.getItem("token");
+        return;
+    }
 
-            const response = await axios.post(
+    try {
 
-                "https://onlinebankingsystem-qguw.onrender.com/api/calculate-emi",
+        setLoading(true);
 
-                {
-                    loan_amount: loanAmount,
-                    interest_rate: interestRate,
-                    tenure: tenure
-                },
+        const response = await axios.post(
 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+            "https://onlinebankingsystem-qguw.onrender.com/api/calculate-emi",
 
-            );
+            {
 
-            setEmi(response.data.monthly_emi);
+                loan_amount: Number(loanAmount),
 
-        } catch (error) {
+                interest_rate: Number(interestRate),
 
-            console.log(error);
+                tenure: Number(tenure)
 
-        } finally {
+            }
 
-            setLoading(false);
+        );
 
-        }
-    };
+        setEmi(response.data.emi);
 
+    } catch (err) {
+
+        console.log(err);
+
+        alert("EMI Calculation Failed");
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+};
+        
     return (
 
         <>
@@ -559,44 +565,54 @@ const EmiCalculator = () => {
 
                         {/* RESULT 😎 */}
 
-                        {emi && (
+{emi && (
 
-                            <div
-                                className="
-                                    mt-10
-                                    bg-gradient-to-r
-                                    from-cyan-500
-                                    to-blue-600
-                                    rounded-3xl
-                                    p-6
-                                    text-center
-                                    animate-zoomFade
-                                "
-                            >
+    <div
+        className="
+            mt-10
+            bg-gradient-to-r
+            from-cyan-500
+            to-blue-600
+            rounded-3xl
+            p-6
+            text-center
+            animate-zoomFade
+        "
+    >
 
-                                <h2
-                                    className="
-                                        text-2xl
-                                        font-bold
-                                        mb-3
-                                    "
-                                >
-                                    Monthly EMI 😎
-                                </h2>
+        <h2
+            className="
+                text-2xl
+                font-bold
+                mb-3
+            "
+        >
 
-                                <h1
-                                    className="
-                                        text-4xl
-                                        md:text-6xl
-                                        font-extrabold
-                                    "
-                                >
-                                    ₹{emi}
-                                </h1>
+            Monthly EMI 😎
 
-                            </div>
+        </h2>
 
-                        )}
+        <h1
+            className="
+                text-4xl
+                md:text-6xl
+                font-extrabold
+            "
+        >
+
+            ₹{emi}
+
+        </h1>
+
+        <p className="mt-4 text-lg text-white">
+
+            Monthly EMI: ₹{emi}
+
+        </p>
+
+    </div>
+
+)}
 
                     </div>
 

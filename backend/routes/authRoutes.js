@@ -260,6 +260,48 @@ message:
 
 });
 
+router.post("/calculate-emi", async (req, res) => {
 
+    try {
+
+        const { loan_amount, interest_rate, tenure } = req.body;
+
+        const P = Number(loan_amount);
+
+        const R = Number(interest_rate) / 12 / 100;
+
+        const N = Number(tenure);
+
+        const emi = (
+
+            P *
+            R *
+            Math.pow(1 + R, N)
+
+        ) /
+
+        (
+
+            Math.pow(1 + R, N) - 1
+
+        );
+
+        res.json({
+
+            emi: emi.toFixed(2)
+
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+
+            message: "EMI Error"
+
+        });
+
+    }
+
+});
 module.exports =
 router;
