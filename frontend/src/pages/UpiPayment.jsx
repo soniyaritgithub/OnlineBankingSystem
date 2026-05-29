@@ -67,21 +67,14 @@ const UpiPayment = () => {
             "/upi-transfer/",
 
             {
-
                 upi_id: upiId,
-
                 amount: Number(amount)
-
             },
 
             {
-
                 headers: {
-
                     Authorization: `Bearer ${token}`
-
                 }
-
             }
 
         );
@@ -111,6 +104,8 @@ const UpiPayment = () => {
         alert(
 
             error.response?.data?.message ||
+
+            JSON.stringify(error.response?.data) ||
 
             "UPI Payment Failed"
 
