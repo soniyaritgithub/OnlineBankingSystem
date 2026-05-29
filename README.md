@@ -12,15 +12,6 @@ https://online-banking-system-eight.vercel.app/
 Backend:
 https://onlinebankingsystem-qguw.onrender.com/
 
-## Live Demo
-
-Frontend:
-https://online-banking-system-eight.vercel.app/
-
-Backend:
-https://onlinebankingsystem-qguw.onrender.com/
-
-
 ## Features
 
 - User Authentication (JWT)
