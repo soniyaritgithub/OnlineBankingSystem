@@ -44,7 +44,7 @@ const LoanPage = () => {
 
             const response = await axios.post(
 
-                "http://127.0.0.1:8000/api/create-loan/",
+                "https://onlinebankingsystem-qguw.onrender.com/api/create-loan",
 
                 {
                     loan_amount: loanAmount,
@@ -67,13 +67,19 @@ const LoanPage = () => {
             setEmi("");
             setDueDate("");
 
-        } catch (error) {
+        } catch(err){
 
-            console.log(error);
+ console.log(err);
 
-            alert("Loan Application Failed ❌");
+ alert(
 
-        } finally {
+   err.response?.data?.message ||
+
+   "Loan Application Failed ❌"
+
+ );
+
+} finally {
 
             setLoading(false);
 
