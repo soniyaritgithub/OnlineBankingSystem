@@ -12,6 +12,15 @@ https://online-banking-system-eight.vercel.app/
 Backend:
 https://onlinebankingsystem-qguw.onrender.com/
 
+## Live Demo
+
+Frontend:
+https://online-banking-system-eight.vercel.app/
+
+Backend:
+https://onlinebankingsystem-qguw.onrender.com/
+
+
 ## Features
 
 - User Authentication (JWT)
@@ -45,6 +54,20 @@ Database:
 Deployment:
 - Vercel
 - Render
+
+## 📸 Screenshots
+
+### Login Page
+
+![Login](screenshots/login-page.png)
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### UPI Payment
+
+![UPI](screenshots/upi-payment.png)
 
 ## Installation
 
