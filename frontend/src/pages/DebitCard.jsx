@@ -58,7 +58,7 @@ const DebitCard = () => {
 
             const response = await axios.get(
 
-                "http://127.0.0.1:8000/api/profile/",
+                "https://smartbank-django-backend.onrender.com/api/profile/",
 
                 {
                     headers: {
