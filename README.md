@@ -117,3 +117,43 @@ Create `.env` file:
 VITE_API_URL=https://onlinebankingsystem-qguw.onrender.com
 JWT_SECRET=your_secret_key
 ```
+
+
+## 🔐 API Endpoints
+
+| Method | Endpoint | Description |
+|-------|-------|-------|
+| POST | `/api/register` | Register new user |
+| POST | `/api/login` | User login |
+| GET | `/api/profile` | Get user profile |
+| POST | `/api/upi-transfer` | Transfer money using UPI |
+| GET | `/api/transactions` | Transaction history |
+| POST | `/api/create-loan` | Create loan request |
+| POST | `/api/send-money` | Send money |
+| POST | `/api/forgot-password` | Forgot password |
+| POST | `/api/reset-password` | Reset password |
+
+
+## 🤝 Contribution Guide
+
+1. Fork the repository
+
+2. Create a new branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit changes
+
+```bash
+git commit -m "your changes"
+```
+
+4. Push code
+
+```bash
+git push origin feature-name
+```
+
+5. Open Pull Request
