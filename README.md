@@ -60,6 +60,33 @@ Deployment:
 
 ![UPI](screenshots/upi-payment.png)
 
+## 📂 Folder Structure
+
+```text
+OnlineBankingSystem
+├── backend
+│   ├── routes
+│   ├── models
+│   ├── controllers
+│   ├── middleware
+│   └── server.js
+
+├── frontend
+│   ├── src
+│   │   ├── pages
+│   │   ├── services
+│   │   ├── components
+│   │   └── assets
+│
+├── screenshots
+│   ├── login-page.png
+│   ├── dashboard.png
+│   └── upi-payment.png
+│
+├── README.md
+└── requirements.txt
+```
+
 ## Installation
 
 ### Frontend Setup
