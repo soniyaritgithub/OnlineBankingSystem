@@ -162,3 +162,15 @@ git push origin feature-name
 ## 🏗 Architecture
 
 ![Architecture](screenshots/architecture.png)
+
+## 👩‍💻 Author
+
+**Sunidhi Shinde**
+
+Aspiring Full Stack Developer passionate about building secure, scalable, and user-friendly web applications.
+
+📌 Role: Full Stack Developer
+
+💼 LinkedIn: https://www.linkedin.com/in/sunidhishinde/
+
+🐙 GitHub: https://github.com/soniyaritgithub
